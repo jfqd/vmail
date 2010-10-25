@@ -1,0 +1,40 @@
+<div class="block" id="block-login">        
+  <div class="content login">
+		<h2>Login Box</h2>
+		<div style="height=15px;">&nbsp;</div>
+    <div class="flash">
+      <% flash.each do |type, message| -%>
+      <div class="message <%=h type %>">
+        <p><%=h message %></p>
+      </div>
+      <% end -%>
+    </div>
+    <% form_tag sessions_path, :class => 'form login' do -%>
+      <div class="group">
+        <div class="left">
+          <label class="label right">Login</label>
+        </div>
+        <div class="right">
+          <%= text_field_tag 'login', @login %>
+        </div>              
+        <div class="clear"></div>
+      </div>
+      <div class="group">
+        <div class="left">
+          <label class="label right">Password</label>
+        </div>
+        <div class="right">
+          <%= password_field_tag 'password', nil %>
+        </div>              
+        <div class="clear"></div>
+      </div>
+      <div class="group navform">
+        <div class="right">
+          <input type="submit" class="button" value="Sign in" />
+        </div>
+        <div class="clear"></div>
+      </div>
+    	<div style="height=15px;">&nbsp;</div>
+		<% end -%>
+  </div>
+</div>

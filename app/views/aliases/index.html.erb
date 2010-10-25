@@ -1,0 +1,56 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul>
+      <li class="first active"><%= link_to 'List', aliases_path %></li>
+      <li><%= link_to 'New', new_alias_path %></li>
+    </ul>
+    <div class="clear"></div>
+  </div>          
+  <div class="content">          
+    <h2 class="title">All Aliases</h2>
+    <div class="inner">
+      <% form_tag "", :class => :form do -%>
+        <table class="table">
+          <tr>             
+            <th class="first">Pos.</th>
+						<th>Active</th>
+            <th>Address</th>
+            <th>Forward to</th>
+						<th>Updated at</th>
+            <th class="last">&nbsp;</th>
+          </tr>
+          <% i=0 ; @aliases.each do |a| -%>
+          <tr>
+            <td>
+              <%= i+=1 %>
+            </td>
+            <td>
+              <%= active_icon(a.active) %>
+            </td>
+            <td>
+              <%= link_to a.address, edit_alias_path(a) %>
+            </td>
+            <td>
+              <%=h a.goto %>
+            </td>
+            <td>
+              <%=h a.updated_at %>
+            </td>
+            <td>
+              <%= link_to 'delete', alias_path(a), :method => :delete, :confirm => 'Are you sure?' %>
+            </td>
+          </tr>
+          <% end -%>
+        </table>
+        <div class="actions-bar">
+          <div class="actions">
+          </div>
+          <%= will_paginate @aliases %>
+          <div class="clear"></div>
+        </div>
+      <% end -%>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'shared/sidebar') -%>

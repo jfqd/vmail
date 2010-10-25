@@ -1,0 +1,9 @@
+h1. Welcome to vmail
+
+vmail is a web-application for managing postfix/dovecot email accounts.
+
+It is inspired by "Howto: Run your own virtual mail server using Ruby on Rails and...":http://ubuntuforums.org/showthread.php?t=398866
+
+Theme by "pilu":http://github.com/pilu/web-app-theme
+
+Copyright &copy; 2009-2010 qutic.com

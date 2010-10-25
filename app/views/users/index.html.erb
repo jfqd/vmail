@@ -1,0 +1,58 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul>
+      <li class="first active"><%= link_to 'List', users_path %></li>
+      <li><%= link_to 'New', new_user_path %></li>
+    </ul>
+    <div class="clear"></div>
+  </div>          
+  <div class="content">          
+    <h2 class="title">All Users</h2>
+    <div class="inner">
+      <% form_tag "", :class => :form do -%>
+        <table class="table">
+          <tr>             
+            <th class="first">Pos.</th>
+            <th>Active</th>
+            <th>Name</th>
+            <th>Domain</th>
+            <th>Updated at</th>
+            <th class="last">&nbsp;</th>
+          </tr>
+          <% i=0 ; @users.each do |user| -%>
+          <tr>
+            <td>
+              <%= i+=1 %>
+            </td>
+            <td>
+              <%= active_icon(user.active) %>
+            </td>
+            <td>
+              <%= link_to user.name, edit_user_path(user) %>
+            </td>
+            <td>
+              <%=h user.domain.domain %>
+            </td>
+            <td>
+              <%=h user.updated_at %>
+            </td>
+            <td>
+              <%= link_to 'delete', user_path(user), :method => :delete, :confirm => 'Are you sure?' %>
+            </td>
+          </tr>          
+          <% end -%>
+        </table>
+        <div class="actions-bar">
+          <div class="actions">
+          </div>
+          
+          <%= will_paginate @user  %>
+          
+          <div class="clear"></div>
+        </div>
+      <% end -%>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'shared/sidebar') -%>

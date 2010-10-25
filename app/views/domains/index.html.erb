@@ -1,0 +1,62 @@
+<div class="block">
+  <div class="secondary-navigation">
+    <ul>
+      <li class="first active"><%= link_to 'List', domains_path %></li>
+      <li><%= link_to 'New', new_domain_path %></li>
+    </ul>
+    <div class="clear"></div>
+  </div>          
+  <div class="content">          
+    <h2 class="title">All Domains</h2>
+    <div class="inner">
+      <% form_tag "", :class => :form do -%>
+        <table class="table">
+          <tr>             
+            <th class="first">Pos.</th>
+            <th>Active</th>
+            <th>Domain</th>
+						<th>Users</th>
+						<th>Aliases</th>
+            <th>Updated at</th>
+            <th class="last">&nbsp;</th>
+          </tr>
+          <% i=0 ; @domains.each do |domain| -%>
+          <tr>
+            <td>
+              <%= i+=1 %>
+            </td>
+            <td>
+              <%= active_icon(domain.active) %>
+            </td>
+            <td>
+              <%= link_to domain.domain, edit_domain_path(domain) %>
+            </td>
+            <td>
+              <%= link_to domain.users.count, "users?domain=" + domain.id.to_s %>
+            </td>
+            <td>
+              <%= link_to domain.aliases.count, "aliases?domain=" + domain.id.to_s %>
+            </td>
+            <td>
+              <%=h domain.updated_at %>
+            </td>
+            <td>
+              <%= link_to 'delete', domain_path(domain), :method => :delete, :confirm => 'Are you sure?' %>
+            </td>
+          </tr>          
+          <% end -%>
+        </table>
+        <div class="actions-bar">
+          <div class="actions">
+          </div>
+          
+          <%= will_paginate @domain  %>
+          
+          <div class="clear"></div>
+        </div>
+      <% end -%>
+    </div>
+  </div>
+</div>
+
+<% content_for :sidebar, render(:partial => 'shared/sidebar') -%>
